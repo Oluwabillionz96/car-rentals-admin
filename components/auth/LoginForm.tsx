@@ -77,7 +77,7 @@ export default function LoginForm() {
 
       <div className="flex flex-col gap-5 pt-1">
         <Button type="submit" isLoading={isSubmitting}>
-          Login to Dashboard
+          Login <span className="hidden lg:block">to Dashboard</span>
         </Button>
 
         {/* Forgot password? - Mobile layout (below button) */}
@@ -91,7 +91,7 @@ export default function LoginForm() {
 
       {/* Authorized Personnel - Mobile Only */}
       <div className="lg:hidden flex flex-col items-center">
-        <div className="h-[1px] bg-gray-100 w-full mt-6 mb-8" />
+        <div className="h-px bg-gray-100 w-full mt-6 mb-8" />
         <p className="text-[10px] font-bold text-gray-400/60 uppercase tracking-[0.25em] text-center">
           AUTHORIZED PERSONNEL ONLY
         </p>
