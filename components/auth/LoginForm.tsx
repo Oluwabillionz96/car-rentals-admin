@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -8,6 +7,10 @@ import { Mail, Lock, ShieldCheck } from "lucide-react";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
+import useCurrentUser from "@/store/use-current-user";
+import { MOCK_USER } from "@/libs/auth";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const loginSchema = z.object({
   email: z.email("Invalid email address"),
@@ -28,9 +31,19 @@ export default function LoginForm() {
       password: "",
     },
   });
+  const router = useRouter();
+  const setCurrentUser = useCurrentUser((state) => state.setCurrentUser);
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log("LOGIN_ATTEMPT_SUCCESS", data);
+    const currentUser = MOCK_USER.find(
+      (user) => user.email === data.email && user.password === data.password,
+    );
+    if (currentUser) {
+      setCurrentUser(currentUser);
+      router.push("/");
+    } else {
+      toast.error("Invalid email or password");
+    }
   };
 
   return (
@@ -82,7 +95,8 @@ export default function LoginForm() {
         </Button>
 
         {/* Forgot password? - Mobile layout (below button) */}
-        <Link href={"/auth/forgot-password"}
+        <Link
+          href={"/auth/forgot-password"}
           className="lg:hidden text-[13px] font-bold text-brand-primary hover:text-brand-secondary transition-colors mt-1"
         >
           Forgot your password?
