@@ -48,6 +48,12 @@ body {
   }
 }
 
+@layer utilities {
+  button {
+    @apply cursor-pointer;
+  }
+}
+
 .animate-bounce-subtle {
   animation: bounce-subtle 3s infinite ease-in-out;
 }

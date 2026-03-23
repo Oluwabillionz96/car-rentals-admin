@@ -7,6 +7,7 @@ import * as z from "zod";
 import { Mail, Lock, ShieldCheck } from "lucide-react";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 const loginSchema = z.object({
   email: z.email("Invalid email address"),
@@ -59,12 +60,12 @@ export default function LoginForm() {
         <Input
           label="PASSWORD"
           labelRight={
-            <button
-              type="button"
+            <Link
+              href={"/auth/forgot-password"}
               className="hidden lg:block text-[10px] font-bold text-brand-primary hover:text-brand-secondary uppercase tracking-widest transition-colors cursor-pointer"
             >
               Forgot?
-            </button>
+            </Link>
           }
           placeholder="••••••••"
           type="password"
@@ -81,12 +82,11 @@ export default function LoginForm() {
         </Button>
 
         {/* Forgot password? - Mobile layout (below button) */}
-        <button
-          type="button"
+        <Link href={"/auth/forgot-password"}
           className="lg:hidden text-[13px] font-bold text-brand-primary hover:text-brand-secondary transition-colors mt-1"
         >
           Forgot your password?
-        </button>
+        </Link>
       </div>
 
       {/* Authorized Personnel - Mobile Only */}
